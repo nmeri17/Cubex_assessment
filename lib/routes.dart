@@ -21,7 +21,8 @@ final getPages = [
 	GetPage(
 		name: Routes.register
 		page: () => const Register()
-		middlewares: [GuestGuard()]
+		middlewares: [GuestGuard()],
+		binding: RegisterBinding()
 	),
 
 	GetPage(

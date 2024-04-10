@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-class ProfileController extends GetxController{ // this isn't the page itself but serves as a container for the page's state. The page itself can be stateless
-  var count = 0.obs;
-  increment() => count++;
-}
+import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
 
@@ -15,13 +11,10 @@ class Profile extends StatelessWidget {
 
     return Scaffold(
       // Use Obx(()=> to update Text() whenever count is changed.
-      // appBar: AppBar(title: Obx(() => Text("Clicks: ${c.count}"))),
-      appBar: AppBar(title: "${user["name"]}'s Profile"),
+      // appBar: AppBar(title: "${user["username"]}'s Profile"),
+      appBar: AppBar(title: "Nmeri's Profile"),
 
-      // Replace the 8 lines Navigator.push by a simple Get.to(). You don't need context
-      body: Center(child: ElevatedButton(
-              child: Text("Go to Other"), onPressed: () => Get.to(Other()))),
-      /*floatingActionButton:
-          FloatingActionButton(child: Icon(Icons.add), onPressed: c.increment));*/
+      // user data goes here
+      body: Column(),
   }
 }
