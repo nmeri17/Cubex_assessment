@@ -1,20 +1,39 @@
+import 'package:cubex/api/api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
+  const Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(context) {
-
-    // Instantiate your class using Get.put() to make it available for all "child" routes there.
-    final ProfileController c = Get.put(ProfileController());
+    Api api = Get.put(Api());
+    Map userDetails = {}.obs;
+    api.getUser().then((value) => userDetails = value);
 
     return Scaffold(
       // Use Obx(()=> to update Text() whenever count is changed.
       // appBar: AppBar(title: "${user["username"]}'s Profile"),
-      appBar: AppBar(title: "Nmeri's Profile"),
+      appBar: AppBar(
+        title: Text("${userDetails['username']}'s profile"),
+      ),
 
       // user data goes here
-      body: Column(),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              CircleAvatar(
+                child: Image.asset('name'),
+              ),
+              Text('username'),
+              Text('email'),
+              Text('address'),
+              Text('phone'),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,9 +1,9 @@
+import 'package:cubex/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() => runApp(GetMaterialApp(
-  routes: getPages,
-  initialRoute: Routes.profile,
-  debugShowCheckedModeBanner: false,
-  title: "Cubex nmeri"
-));
+    getPages: getPages,
+    initialRoute: Routes.profile,
+    debugShowCheckedModeBanner: false,
+    title: "Cubex nmeri"));

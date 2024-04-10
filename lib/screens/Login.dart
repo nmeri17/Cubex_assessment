@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../api/api.dart';
 
 class Login extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('LOGIN')),
+      appBar: AppBar(title: const Text('LOGIN')),
       body: Container(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -24,8 +27,8 @@ class Login extends GetView<LoginController> {
                 validator: controller.validator,
                 obscureText: true,
               ),
-              RaisedButton(
-                child: Text('Login'),
+              TextButton(
+                child: const Text('Login'),
                 onPressed: controller.login,
               )
             ],
@@ -50,13 +53,12 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-
     GetStorage box = GetStorage();
-    
-    emailController.text = box.getData("user_email");
+
+    emailController.text = box.read("user_email");
     super.onInit();
   }
-  
+
   @override
   void onClose() {
     emailController.dispose();
@@ -64,23 +66,24 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
-  String validator(String value) {
-    if (value.isEmpty) {
+  String? validator(String? value) {
+    if (value!.isEmpty) {
       return 'Please this field must be filled';
     }
     return null;
   }
 
   void login() {
-    if (loginFormKey.currentState.validate()) {
-
+    if (loginFormKey.currentState!.validate()) {
       Api api = Get.put(Api());
-      
-      api.login({
+
+      api.loginUser({
         "email": emailController.text,
         "password": passwordController.text
-      }).then((auth) {
-        if (auth) {
+      }).then((response) {
+        if (response.body["token"] != null) {
+          GetStorage box = GetStorage();
+          box.write('user_token', response.body["token"]);
           Get.snackbar('Login', 'Login successfully');
         } else {
           Get.snackbar('Login', 'Invalid email or password');
