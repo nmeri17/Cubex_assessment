@@ -14,7 +14,8 @@ final getPages = [
 	GetPage(
 		name: Routes.login
 		page: () => const Login()
-		middlewares: [GuestGuard()]
+		middlewares: [GuestGuard()],
+        binding: LoginBinding()
 	),
 
 	GetPage(
