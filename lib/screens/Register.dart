@@ -71,12 +71,15 @@ class RegisterController extends GetxController {
   final usernameController = TextEditingController();
   final phoneController = TextEditingController();
   final addressController = TextEditingController();
-  //final passwordController = TextEditingController();
+  //final imageController = TextEditingController();
   
   @override
   void onClose() {
+    username Controller.dispose();
     emailController.dispose();
     passwordController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
     super.onClose();
   }
 
@@ -92,7 +95,14 @@ class RegisterController extends GetxController {
 
       Api api = Get.put(Api());
       
-      api.register(emailController.text, passwordController.text).then((auth) {
+      api.register({
+        
+        "email": emailController.text,
+        "password": passwordController.text,
+        "username": usernameController.text,
+        "phone": phoneController.text,
+        "address": addressController.text
+      }, imageInput).then((auth) {
         if (auth) {
           Get.snackbar('Register', 'Register successfully');
         } else {
