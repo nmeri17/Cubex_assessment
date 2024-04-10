@@ -76,7 +76,10 @@ class LoginController extends GetxController {
 
       Api api = Get.put(Api());
       
-      api.login(emailController.text, passwordController.text).then((auth) {
+      api.login({
+        "email": emailController.text,
+        "password": passwordController.text
+      }).then((auth) {
         if (auth) {
           Get.snackbar('Login', 'Login successfully');
         } else {
