@@ -14,7 +14,7 @@ class Register extends GetView<RegisterController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
-                controller: controller.emailController,
+                controller: controller.usernameController,
                 decoration: const InputDecoration(labelText: 'Username'),
                 validator: controller.validator,
               ),
@@ -31,20 +31,20 @@ class Register extends GetView<RegisterController> {
                 validator: controller.validator,
               ),
               TextFormField(
-                controller: controller.emailController,
+                controller: controller.phoneController,
                 decoration: const InputDecoration(labelText: 'Phone'),
                 validator: controller.validator,
-              )
+              ),
               TextFormField(
-                controller: controller.emailController,
+                controller: controller.addressController,
                 decoration: const InputDecoration(labelText: 'Address'),
                 validator: controller.validator,
-              )
-              TextFormField(
+              ),
+              /*TextFormField(
                 controller: controller.emailController,
                 decoration: const InputDecoration(labelText: 'Image'),
                 validator: controller.validator,
-              )
+              ),*/
               RaisedButton(
                 child: Text('Register'),
                 onPressed: controller.register,
@@ -68,7 +68,10 @@ class RegisterController extends GetxController {
   final registerFormKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  // add the rest of the controllers here
+  final usernameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final addressController = TextEditingController();
+  //final passwordController = TextEditingController();
   
   @override
   void onClose() {
@@ -93,7 +96,7 @@ class RegisterController extends GetxController {
         if (auth) {
           Get.snackbar('Register', 'Register successfully');
         } else {
-          Get.snackbar('Register', 'Invalid email or password');
+          Get.snackbar('Register', 'Invalid registration data');
         }
         passwordController.clear();
       });
