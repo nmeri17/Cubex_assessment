@@ -24,12 +24,12 @@ class Profile extends StatelessWidget {
           child: Column(
             children: [
               CircleAvatar(
-                child: Image.asset('name'),
+                child: Image.asset(userDetails['image']),
               ),
-              Text('username'),
-              Text('email'),
-              Text('address'),
-              Text('phone'),
+              Text(userDetails['username']),
+              Text(userDetails['email']),
+              Text(userDetails['address']),
+              Text(userDetails['phone']),
             ],
           ),
         ),

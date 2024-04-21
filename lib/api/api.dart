@@ -20,7 +20,7 @@ class Api extends GetConnect {
     return post(
         '/register',
         FormData({
-          'file': image,
+          'image': image,
           'data': data,
         }));
   }
